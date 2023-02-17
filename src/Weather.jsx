@@ -5,13 +5,17 @@ function Weather(){
 
    let weatherDetails = useContext(weatherDataContext)
 
-    let [todaysTemp, setTodaysTemp] = useState('Loading...')
-    
+    let [todaysMaxTemp, setTodaysMaxTemp] = useState('Loading...')
+    let [todaysMinTemp, setTodaysMinTemp] = useState('Loading...')
+    let [unitType, setUnitType] = useState('')
     
     useEffect(()=>{
         weatherDetails()
         .then((res)=>{
-            setTodaysTemp(res.daily.temperature_2m_max[0])
+            
+            setTodaysMaxTemp(res.daily.temperature_2m_max[0])
+            setTodaysMinTemp(res.daily.temperature_2m_min[0])
+            setUnitType(res.hourly_units.temperature_2m)
         })
     },[])
 
@@ -19,11 +23,11 @@ function Weather(){
 
     return(
         
-        <weatherDataContext.Provider value={weatherDetails.daily}>
+        <weatherDataContext.Provider value={weatherDetails}>
             
         <h1>Todays Temp info </h1>
-        <p>Temp Max : {todaysTemp} </p>
-        <p>Temp Min : </p>
+        <p>Temp Max : {todaysMaxTemp}{unitType}</p>
+        <p>Temp Min : {todaysMinTemp}{unitType}</p>
         
         </weatherDataContext.Provider>
     )
