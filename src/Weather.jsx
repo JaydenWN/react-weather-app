@@ -1,35 +1,24 @@
-import { useState, useEffect, useContext } from "react"
-import weatherDataContext from "./weatherData"
+import { Suspense } from "react"
+import dataFetch from "./fetchWeatherData"
+let resource = dataFetch()
+
 
 function Weather(){
 
-   let weatherDetails = useContext(weatherDataContext)
-
-    let [todaysMaxTemp, setTodaysMaxTemp] = useState('Loading...')
-    let [todaysMinTemp, setTodaysMinTemp] = useState('Loading...')
-    let [unitType, setUnitType] = useState('')
     
-    useEffect(()=>{
-        weatherDetails()
-        .then((res)=>{
-            
-            setTodaysMaxTemp(res.daily.temperature_2m_max[0])
-            setTodaysMinTemp(res.daily.temperature_2m_min[0])
-            setUnitType(res.hourly_units.temperature_2m)
-        })
-    },[])
-
-
+    let weatherData = resource.weatherData.read()
 
     return(
+        <>
         
-        <weatherDataContext.Provider value={weatherDetails}>
-            
+        <Suspense fallback={<h1>Loading...</h1>}>
+                <h1>{console.log(weatherData)}{weatherData.elevation}</h1>
+        </Suspense>
         <h1>Todays Temp info </h1>
-        <p>Temp Max : {todaysMaxTemp}{unitType}</p>
-        <p>Temp Min : {todaysMinTemp}{unitType}</p>
+        <p>Temp Max : </p>
+        <p>Temp Min : </p>
         
-        </weatherDataContext.Provider>
+        </>
     )
 }
 
