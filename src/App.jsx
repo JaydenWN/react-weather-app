@@ -1,6 +1,4 @@
-
-import { Suspense } from "react"
-import Weather from "./Weather"
+import WeatherDisplay from "./WeatherDisplay"
 
 
 function App() {
@@ -10,9 +8,9 @@ function App() {
     <>
     <h1>🌞 Weather App 🌞</h1>
     
-    <Weather>
+    <WeatherDisplay>
 
-    </Weather>
+    </WeatherDisplay>
     
     
     </>

@@ -11,3 +11,5 @@ function WeatherCard({maxTemp, minTemp, date, unitType}){
     )
 
 }
+
+export default WeatherCard
