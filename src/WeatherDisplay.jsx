@@ -5,9 +5,13 @@ import WeatherCard from "./weatherCard"
 let resource = dataFetch()
 
 function dayOfWeek(date){
-    let theDate = new Date(date)
-    let theDay = theDate.getDay()
-    
+    const theDate = new Date(date)
+    const theDay = theDate.getDay()
+    const nowDate = new Date()
+    const nowDay = nowDate.getDay()
+    if(nowDay === theDay){
+        return 'Today'
+    }
     switch(theDay){
         case 0:
             return 'Sunday'
@@ -43,6 +47,7 @@ function WeatherDisplay(){
                 date={dayOfWeek(weatherData.daily.time[i])}
                 unitType={weatherData.daily_units.temperature_2m_max}
                 key={weatherData.daily.time[i]}>
+                    {console.log(Date())}
                 </WeatherCard>
             )}{
                 
