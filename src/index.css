@@ -46,3 +46,8 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+#weatherContainer{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 25px;
+}
